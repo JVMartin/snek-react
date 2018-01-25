@@ -12,19 +12,23 @@ export const startIntro = () => (dispatch, getState) => {
     const coords = [];
     for (let y = 0; y < state.height / 2; ++y) {
         for (let x = 0; x < state.width / 2; ++x) {
-            coords.push({ x, y });
-            coords.push({ x: state.width - x - 1, y: state.height - y - 1 });
+            coords.push([
+                { x, y },
+                { x: state.width - x - 1, y: state.height - y - 1 },
+            ]);
         }
     }
 
     // Reduce coordinates to promises.
-    const tileMarch = _.reduce(coords, (promise, c) => {
+    const tileMarch = _.reduce(coords, (promise, cs) => {
         return promise.then(() => new Promise(resolve => {
             setTimeout(() => {
-                dispatch({
-                    type: 'SHOW_TILE',
-                    x: c.x,
-                    y: c.y,
+                cs.forEach(c => {
+                    dispatch({
+                        type: 'SHOW_TILE',
+                        x: c.x,
+                        y: c.y,
+                    });
                 });
                 resolve();
             }, 1);
