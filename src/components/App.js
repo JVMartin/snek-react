@@ -15,6 +15,15 @@ export const AppComponent = props => {
 
     console.log(props);
 
+    const handleKeyPress = (event, value, handler) => {
+        if (event.key === 'ArrowUp') {
+            handler(value + 1);
+        }
+        else if (event.key === 'ArrowDown') {
+            handler(value - 1);
+        }
+    };
+
     return (
         <div id="masterWrap">
             <Board width={width} height={height} />
@@ -22,12 +31,22 @@ export const AppComponent = props => {
                 <tbody>
                     <tr>
                         <td>Width:</td>
-                        <td><input type="text" value={width} onChange={onWidthChange} /></td>
+                        <td>
+                            <input type="text"
+                                   value={width}
+                                   onChange={event => onWidthChange(event.target.value)}
+                                   onKeyDown={event => handleKeyPress(event, width, onWidthChange)} />
+                        </td>
                         <td>{width}</td>
                     </tr>
                     <tr>
                         <td>Height:</td>
-                        <td><input type="text" value={height} onChange={onHeightChange} /></td>
+                        <td>
+                            <input type="text"
+                                   value={height}
+                                   onChange={event => onHeightChange(event.target.value)}
+                                   onKeyDown={event => handleKeyPress(event, height, onHeightChange)} />
+                        </td>
                         <td>{height}</td>
                     </tr>
                 </tbody>
@@ -42,8 +61,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    onWidthChange: event => dispatch(updateWidth(event.target.value)),
-    onHeightChange: event => dispatch(updateHeight(event.target.value)),
+    onWidthChange: width => dispatch(updateWidth(width)),
+    onHeightChange: height => dispatch(updateHeight(height)),
 });
 
 export const App = connect(
