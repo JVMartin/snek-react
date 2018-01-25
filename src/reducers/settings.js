@@ -6,7 +6,7 @@ const initializeBoard = (width, height) => {
 
         for (let x = 0; x < width; ++x) {
             // Borders
-            if (x === 0 || x === width -1 ||
+            if (x === 0 || x === width - 1 ||
                 y === 0 || y === height - 1) {
                 row.push('X');
             } else {
