@@ -1,6 +1,6 @@
 const initialState = {
-    width: 10,
-    height: 10,
+    width: 20,
+    height: 20,
 };
 
 export const settings = (state = initialState, action) => {

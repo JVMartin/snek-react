@@ -35,7 +35,6 @@ export const AppComponent = props => {
                                    onChange={event => onWidthChange(event.target.value)}
                                    onKeyDown={event => handleKeyPress(event, width, onWidthChange)} />
                         </td>
-                        <td>{width}</td>
                     </tr>
                     <tr>
                         <td>Height:</td>
@@ -45,7 +44,6 @@ export const AppComponent = props => {
                                    onChange={event => onHeightChange(event.target.value)}
                                    onKeyDown={event => handleKeyPress(event, height, onHeightChange)} />
                         </td>
-                        <td>{height}</td>
                     </tr>
                 </tbody>
             </table>
