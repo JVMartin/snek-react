@@ -4,7 +4,7 @@ const MIN_HEIGHT = 5;
 const MAX_HEIGHT = 20;
 
 export const updateWidth = width => {
-    let newWidth = parseInt(width);
+    let newWidth = parseInt(width, 10);
 
     if (newWidth < MIN_WIDTH) {
         newWidth = MIN_WIDTH;
@@ -20,7 +20,7 @@ export const updateWidth = width => {
 };
 
 export const updateHeight = height => {
-    let newHeight = parseInt(height);
+    let newHeight = parseInt(height, 10);
 
     if (newHeight < MIN_HEIGHT) {
         newHeight = MIN_HEIGHT;

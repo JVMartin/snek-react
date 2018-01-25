@@ -3,13 +3,13 @@ import {Tile} from "./Tile";
 import './Board.css';
 
 export const Board = props => {
-    const { width, height } = props;
+    const { board } = props;
 
     const rows = [];
-    for (let y = 0; y < height; ++y) {
+    for (let row of board) {
         const cols = [];
-        for (let x = 0; x < width; ++x) {
-            cols.push(<Tile />);
+        for (let col of row) {
+            cols.push(<Tile symbol={col} />);
         }
         rows.push(<div className="row">{cols}</div>);
     }

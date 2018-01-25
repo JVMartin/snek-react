@@ -5,3 +5,7 @@
     border: 1px solid #FFF;
     margin: 1px;
 }
+
+.tile.wall {
+    background: #61005d;
+}

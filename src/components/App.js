@@ -7,6 +7,7 @@ import { updateWidth, updateHeight } from "../actions/app";
 
 export const AppComponent = props => {
     const {
+        board,
         width,
         height,
         onWidthChange,
@@ -24,7 +25,7 @@ export const AppComponent = props => {
 
     return (
         <div id="masterWrap">
-            <Board width={width} height={height} />
+            <Board board={board} />
             <table>
                 <tbody>
                     <tr>
@@ -52,6 +53,7 @@ export const AppComponent = props => {
 };
 
 const mapStateToProps = state => ({
+    board: state.settings.board,
     width: state.settings.width,
     height: state.settings.height,
 });
