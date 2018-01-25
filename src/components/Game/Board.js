@@ -6,12 +6,12 @@ export const Board = props => {
     const { board } = props;
 
     const rows = [];
-    for (let row of board) {
+    for (const [y, row] of board.entries()) {
         const cols = [];
-        for (let col of row) {
-            cols.push(<Tile symbol={col} />);
+        for (const [x, col] of row.entries()) {
+            cols.push(<Tile symbol={col} key={x} />);
         }
-        rows.push(<div className="row">{cols}</div>);
+        rows.push(<div className="row" key={y}>{cols}</div>);
     }
 
     return (
