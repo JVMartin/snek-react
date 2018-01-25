@@ -1,10 +1,11 @@
 import React from 'react';
 import classNames from 'classnames';
+import PropTypes from 'prop-types';
 
 import './Tile.css';
 
 const classNameMap = {
-    'X': 'wall',
+    X: 'wall',
 };
 
 export const Tile = props => {
@@ -13,7 +14,10 @@ export const Tile = props => {
     } = props;
 
     return (
-        <div className={classNames('tile', classNameMap[symbol])}>
-        </div>
+        <div className={classNames('tile', classNameMap[symbol])} />
     );
+};
+
+Tile.propTypes = {
+    symbol: PropTypes.string.isRequired,
 };

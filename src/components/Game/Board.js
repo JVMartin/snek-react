@@ -23,10 +23,12 @@ export const Board = props => {
     );
 };
 
+export const boardPropType = PropTypes.arrayOf(
+    PropTypes.arrayOf(
+        PropTypes.string,
+    ),
+);
+
 Board.propTypes = {
-    board: PropTypes.arrayOf(
-        PropTypes.arrayOf(
-            PropTypes.string,
-        ),
-    ).isRequired,
+    board: boardPropType.isRequired,
 };

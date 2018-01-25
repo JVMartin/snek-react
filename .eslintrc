@@ -7,6 +7,7 @@
     "arrow-parens": ["error", "as-needed"],
     "react/jsx-filename-extension": false,
     "react/no-array-index-key": false,
-    "react/jsx-indent": ["error", 4]
+    "react/jsx-indent": ["error", 4],
+    "react/jsx-indent-props": false
   }
 }

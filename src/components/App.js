@@ -1,9 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import './App.css';
-import { Board } from './Game/Board';
-import { updateWidth, updateHeight } from "../actions/app";
+import { Board, boardPropType } from './Game/Board';
+import { updateWidth, updateHeight } from '../actions/app';
 
 export const AppComponent = props => {
     const {
@@ -31,25 +32,37 @@ export const AppComponent = props => {
                     <tr>
                         <td>Width:</td>
                         <td>
-                            <input type="text"
-                                   value={width}
-                                   onChange={event => onWidthChange(event.target.value)}
-                                   onKeyDown={event => handleKeyPress(event, width, onWidthChange)} />
+                            <input
+                                type="text"
+                                value={width}
+                                onChange={event => onWidthChange(event.target.value)}
+                                onKeyDown={event => handleKeyPress(event, width, onWidthChange)}
+                            />
                         </td>
                     </tr>
                     <tr>
                         <td>Height:</td>
                         <td>
-                            <input type="text"
-                                   value={height}
-                                   onChange={event => onHeightChange(event.target.value)}
-                                   onKeyDown={event => handleKeyPress(event, height, onHeightChange)} />
+                            <input
+                                type="text"
+                                value={height}
+                                onChange={event => onHeightChange(event.target.value)}
+                                onKeyDown={event => handleKeyPress(event, height, onHeightChange)}
+                            />
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
     );
+};
+
+AppComponent.propTypes = {
+    board: boardPropType.isRequired,
+    width: PropTypes.number.isRequired,
+    height: PropTypes.number.isRequired,
+    onWidthChange: PropTypes.func.isRequired,
+    onHeightChange: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
