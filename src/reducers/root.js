@@ -1,4 +1,6 @@
-const initializeBoard = (width, height) => {
+import update from 'immutability-helper';
+
+const initializeBoard = (width, height, visible = true) => {
     const board = [];
 
     for (let y = 0; y < height; ++y) {
@@ -8,10 +10,16 @@ const initializeBoard = (width, height) => {
             // Borders
             if (x === 0 || x === width - 1 ||
                 y === 0 || y === height - 1) {
-                row.push('X');
+                row.push({
+                    type: 'X',
+                    visible,
+                });
             }
             else {
-                row.push(' ');
+                row.push({
+                    type: ' ',
+                    visible,
+                });
             }
         }
 
@@ -23,14 +31,35 @@ const initializeBoard = (width, height) => {
 
 const initialState = {
     board: [],
+    boardVisible: false,
     width: 20,
     height: 20,
 };
 
-initialState.board = initializeBoard(initialState.width, initialState.height);
+initialState.board = initializeBoard(initialState.width, initialState.height, false);
 
 export const rootReducer = (state = initialState, action) => {
     switch (action.type) {
+        case 'SHOW_BOARD':
+            return {
+                ...state,
+                boardVisible: true,
+            };
+        case 'HIDE_BOARD':
+            return {
+                ...state,
+                boardVisible: false,
+            };
+        case 'SHOW_TILE':
+            return update(state, {
+                board: {
+                    [action.y]: {
+                        [action.x]: {
+                            visible: { $set: true },
+                        },
+                    },
+                },
+            });
         case 'UPDATE_WIDTH':
             if (state.width === action.width) {
                 return state;

@@ -1,23 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 import { Tile } from './Tile';
 import './Board.css';
 
 export const Board = props => {
-    const { board } = props;
+    const {
+        board,
+        visible,
+    } = props;
 
     const rows = [];
     board.forEach((row, y) => {
         const cols = [];
-        row.forEach((col, x) => {
-            cols.push(<Tile symbol={col} key={x} />);
+        row.forEach((tile, x) => {
+            cols.push(<Tile tile={tile} key={x} />);
         });
         rows.push(<div className="row" key={y}>{cols}</div>);
     });
 
     return (
-        <div>
+        <div id="board" className={classNames({ hide: !visible })}>
             {rows}
         </div>
     );
@@ -31,4 +35,5 @@ export const boardPropType = PropTypes.arrayOf(
 
 Board.propTypes = {
     board: boardPropType.isRequired,
+    visible: PropTypes.bool.isRequired,
 };

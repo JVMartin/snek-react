@@ -3,6 +3,27 @@ const MAX_WIDTH = 30;
 const MIN_HEIGHT = 5;
 const MAX_HEIGHT = 20;
 
+export const startIntro = () => (dispatch, getState) => {
+    const state = getState();
+
+    const w = state.width;
+    const h = state.height;
+
+    dispatch({ type: 'SHOW_TILE', x: 0, y: 0 });
+    /*
+    const timeBetweenBlinks = 150;
+    const numBlinks = 3;
+    for (let i = 1; i < numBlinks + 1; ++i) {
+        setTimeout(() => dispatch({ type: 'SHOW_BOARD' }), i * timeBetweenBlinks);
+        setTimeout(() => dispatch({ type: 'HIDE_BOARD' }), (i * timeBetweenBlinks) + (timeBetweenBlinks / 2));
+
+        if (i === numBlinks) {
+            setTimeout(() => dispatch({ type: 'SHOW_BOARD' }), (i + 1) * timeBetweenBlinks);
+        }
+    }
+    */
+};
+
 export const updateWidth = width => {
     let newWidth = parseInt(width, 10);
 

@@ -10,14 +10,17 @@ const classNameMap = {
 
 export const Tile = props => {
     const {
-        symbol,
+        tile,
     } = props;
 
     return (
-        <div className={classNames('tile', classNameMap[symbol])} />
+        <div className={classNames('tile', classNameMap[tile.symbol])} />
     );
 };
 
 Tile.propTypes = {
-    symbol: PropTypes.string.isRequired,
+    tile: PropTypes.shape({
+        symbol: PropTypes.string.isRequired,
+        visible: PropTypes.bool.isRequired,
+    }).isRequired,
 };
