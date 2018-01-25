@@ -5,30 +5,20 @@ import PropTypes from 'prop-types';
 import './App.css';
 import { Board, boardPropType } from './Game/Board';
 import { startIntro } from '../actions/intro';
+import { keyPress } from '../actions/game';
 
 export class AppComponent extends Component {
     componentDidMount() {
         this.props.onLoad();
+
+        document.addEventListener('keydown', this.props.onKeypress);
     }
 
     render() {
         const {
             board,
             boardVisible,
-            width,
-            height,
-            onWidthChange,
-            onHeightChange,
         } = this.props;
-
-        const handleKeyPress = (event, value, handler) => {
-            if (event.key === 'ArrowUp') {
-                handler(value + 1);
-            }
-            else if (event.key === 'ArrowDown') {
-                handler(value - 1);
-            }
-        };
 
         return (
             <div id="masterWrap">
@@ -41,9 +31,8 @@ export class AppComponent extends Component {
 AppComponent.propTypes = {
     board: boardPropType.isRequired,
     boardVisible: PropTypes.bool.isRequired,
-    width: PropTypes.number.isRequired,
-    height: PropTypes.number.isRequired,
     onLoad: PropTypes.func.isRequired,
+    onKeypress: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -56,6 +45,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     onLoad: () => dispatch(startIntro()),
+    onKeypress: event => dispatch(keyPress(event)),
 });
 
 export const App = connect(
