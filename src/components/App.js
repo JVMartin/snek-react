@@ -66,9 +66,9 @@ AppComponent.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    board: state.settings.board,
-    width: state.settings.width,
-    height: state.settings.height,
+    board: state.board,
+    width: state.width,
+    height: state.height,
 });
 
 const mapDispatchToProps = dispatch => ({
