@@ -51,7 +51,6 @@ export const startIntro = () => (dispatch, getState) => {
             if (i === numBlinks - 1) {
                 setTimeout(() => {
                     dispatch({ type: 'SHOW_BOARD' });
-                    dispatch({ type: 'FINISH_INTRO' });
                     resolve();
                 }, (i + 1) * timeBetweenBlinks);
             }

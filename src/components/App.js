@@ -36,7 +36,6 @@ AppComponent.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    doingIntro: state.doingIntro,
     board: state.board,
     boardVisible: state.boardVisible,
     width: state.width,
