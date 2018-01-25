@@ -1,5 +1,6 @@
 import React from 'react';
 import {Tile} from "./Tile";
+import './Board.css';
 
 export const Board = props => {
     const { width, height } = props;
@@ -10,7 +11,7 @@ export const Board = props => {
         for (let x = 0; x < width; ++x) {
             cols.push(<Tile />);
         }
-        rows.push(<div>{cols}</div>);
+        rows.push(<div className="row">{cols}</div>);
     }
 
     return (

@@ -4,7 +4,7 @@ import './Tile.css';
 
 export const Tile = props => {
     return (
-        <span className="tile">
-        </span>
+        <div className="tile">
+        </div>
     );
 };
