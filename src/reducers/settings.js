@@ -27,7 +27,6 @@ const initialState = {
 };
 
 initialState.board = initializeBoard(initialState.width, initialState.height);
-console.log(initialState);
 
 export const settings = (state = initialState, action) => {
     switch (action.type) {
