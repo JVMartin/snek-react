@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import './App.css';
-import Board from './Game/Board';
+import { Board } from './Game/Board';
 import { updateWidth, updateHeight } from "../actions/app";
 
 export const AppComponent = props => {
@@ -17,7 +17,7 @@ export const AppComponent = props => {
 
     return (
         <div id="masterWrap">
-            <Board />
+            <Board width={width} height={height} />
             <table>
                 <tbody>
                     <tr>
