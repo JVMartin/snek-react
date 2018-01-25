@@ -5,7 +5,8 @@ import classNames from 'classnames';
 
 import './App.css';
 import { Board, boardPropType } from './Game/Board';
-import { startIntro, updateWidth, updateHeight } from '../actions/app';
+import { updateWidth, updateHeight } from '../actions/settings';
+import { startIntro } from '../actions/intro';
 
 export class AppComponent extends Component {
     componentDidMount() {
