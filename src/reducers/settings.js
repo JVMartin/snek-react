@@ -9,7 +9,8 @@ const initializeBoard = (width, height) => {
             if (x === 0 || x === width - 1 ||
                 y === 0 || y === height - 1) {
                 row.push('X');
-            } else {
+            }
+            else {
                 row.push(' ');
             }
         }
