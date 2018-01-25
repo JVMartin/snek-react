@@ -13,8 +13,6 @@ export const AppComponent = props => {
         onHeightChange,
     } = props;
 
-    console.log(props);
-
     const handleKeyPress = (event, value, handler) => {
         if (event.key === 'ArrowUp') {
             handler(value + 1);
