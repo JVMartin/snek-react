@@ -3,7 +3,6 @@ import _ from 'lodash';
 export const startIntro = () => (dispatch, getState) => {
     const state = getState();
 
-    // Create 1d array of coordinates.
     const coords = [];
     for (let y = 0; y < state.height / 2; ++y) {
         for (let x = 0; x < state.width / 2; ++x) {
@@ -28,7 +27,6 @@ export const startIntro = () => (dispatch, getState) => {
         }
     }
 
-    // Reduce coordinates to promises.
     const tileMarch = _.reduce(coords, (promise, cs) => (
         promise.then(() => new Promise(resolve => {
             setTimeout(() => {
