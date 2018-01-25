@@ -74,24 +74,6 @@ export const rootReducer = (state = initialState, action) => {
                 board: newBoard,
             };
         }
-        case 'UPDATE_WIDTH':
-            if (state.width === action.width) {
-                return state;
-            }
-            return {
-                ...state,
-                board: initializeBoard(action.width, state.height),
-                width: action.width,
-            };
-        case 'UPDATE_HEIGHT':
-            if (state.height === action.height) {
-                return state;
-            }
-            return {
-                ...state,
-                board: initializeBoard(state.width, action.height),
-                height: action.height,
-            };
         default:
             return state;
     }
