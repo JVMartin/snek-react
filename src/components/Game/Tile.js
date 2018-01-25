@@ -1,9 +1,10 @@
 import React from 'react';
 
+import './Tile.css';
+
 export const Tile = props => {
     return (
-        <span>
-            X
+        <span className="tile">
         </span>
     );
 };
