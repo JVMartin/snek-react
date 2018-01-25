@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 import './App.css';
 import { Board, boardPropType } from './Game/Board';
@@ -19,6 +20,7 @@ export class AppComponent extends Component {
             height,
             onWidthChange,
             onHeightChange,
+            doingIntro,
         } = this.props;
 
         const handleKeyPress = (event, value, handler) => {
@@ -33,7 +35,7 @@ export class AppComponent extends Component {
         return (
             <div id="masterWrap">
                 <Board board={board} visible={boardVisible} />
-                <table>
+                <table className={classNames({ hide: doingIntro })}>
                     <tbody>
                         <tr>
                             <td>Width:</td>
@@ -72,9 +74,11 @@ AppComponent.propTypes = {
     onWidthChange: PropTypes.func.isRequired,
     onHeightChange: PropTypes.func.isRequired,
     onLoad: PropTypes.func.isRequired,
+    doingIntro: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => ({
+    doingIntro: state.doingIntro,
     board: state.board,
     boardVisible: state.boardVisible,
     width: state.width,

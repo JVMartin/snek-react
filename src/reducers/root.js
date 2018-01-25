@@ -35,12 +35,18 @@ const initialState = {
     boardVisible: true,
     width: 20,
     height: 20,
+    doingIntro: true,
 };
 
 initialState.board = initializeBoard(initialState.width, initialState.height, false);
 
 export const rootReducer = (state = initialState, action) => {
     switch (action.type) {
+        case 'FINISH_INTRO':
+            return {
+                ...state,
+                doingIntro: false,
+            };
         case 'SHOW_BOARD':
             return {
                 ...state,
