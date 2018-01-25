@@ -3,7 +3,7 @@ const initialState = {
     height: 10,
 };
 
-export const app = (state = initialState, action) => {
+export const settings = (state = initialState, action) => {
     switch (action.type) {
         case 'UPDATE_WIDTH':
             return {

@@ -13,18 +13,22 @@ export const AppComponent = props => {
         onHeightChange,
     } = props;
 
+    console.log(props);
+
     return (
-        <div>
+        <div id="masterWrap">
             <Board />
             <table>
                 <tbody>
                     <tr>
                         <td>Width:</td>
                         <td><input type="text" value={width} onChange={onWidthChange} /></td>
+                        <td>{width}</td>
                     </tr>
                     <tr>
                         <td>Height:</td>
                         <td><input type="text" value={height} onChange={onHeightChange} /></td>
+                        <td>{height}</td>
                     </tr>
                 </tbody>
             </table>
@@ -33,13 +37,13 @@ export const AppComponent = props => {
 };
 
 const mapStateToProps = state => ({
-    width: state.width,
-    height: state.height,
+    width: state.settings.width,
+    height: state.settings.height,
 });
 
 const mapDispatchToProps = dispatch => ({
-    onWidthChange: width => dispatch(updateWidth(width)),
-    onHeightChange: height => dispatch(updateHeight(height)),
+    onWidthChange: event => dispatch(updateWidth(event.target.value)),
+    onHeightChange: event => dispatch(updateHeight(event.target.value)),
 });
 
 export const App = connect(
