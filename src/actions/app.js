@@ -8,8 +8,6 @@ const MAX_HEIGHT = 20;
 export const startIntro = () => (dispatch, getState) => {
     const state = getState();
 
-    dispatch({ type: 'SHOW_TILE', x: 0, y: 0 });
-
     // Create 1d array of coordinates.
     const coords = [];
     for (let y = 0; y < state.height; ++y) {
