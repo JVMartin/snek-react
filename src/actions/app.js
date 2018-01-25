@@ -1,9 +1,17 @@
-export const updateWidth = width => ({
-    type: 'UPDATE_WIDTH',
-    width,
-});
+export const updateWidth = width => {
+    const parsedWidth = parseInt(width);
 
-export const updateHeight = height => ({
-    type: 'UPDATE_HEIGHT',
-    height,
-});
+    return {
+        type: 'UPDATE_WIDTH',
+        width: (parsedWidth > 1) ? parsedWidth : 1,
+    };
+};
+
+export const updateHeight = height => {
+    const parsedHeight = parseInt(height);
+
+    return {
+        type: 'UPDATE_HEIGHT',
+        height: (parsedHeight > 1) ? parsedHeight : 1,
+    };
+};
