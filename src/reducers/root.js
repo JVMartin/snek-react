@@ -31,7 +31,7 @@ const initializeBoard = (width, height, visible = true) => {
 
 const initialState = {
     board: [],
-    boardVisible: false,
+    boardVisible: true,
     width: 20,
     height: 20,
 };

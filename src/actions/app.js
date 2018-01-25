@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 const MIN_WIDTH = 5;
 const MAX_WIDTH = 30;
 const MIN_HEIGHT = 5;
@@ -6,11 +8,25 @@ const MAX_HEIGHT = 20;
 export const startIntro = () => (dispatch, getState) => {
     const state = getState();
 
-    const w = state.width;
-    const h = state.height;
-
-    dispatch({ type: 'SHOW_BOARD' });
     dispatch({ type: 'SHOW_TILE', x: 0, y: 0 });
+
+    // Create 1d array of coordinates.
+    const coords = [];
+    for (let y = 0; y < state.height; ++y) {
+        for (let x = 0; x < state.width; ++x) {
+            coords.push({ x, y });
+        }
+    }
+
+    // Reduce coordinates to promises.
+    return _.reduce(coords, (promise, c) => {
+        return promise.then(new Promise(resolve => {
+            setTimeout(() => {
+                dispatch({ type: 'SHOW_TILE', x: c.x, y: c.y });
+                resolve();
+            }, 50);
+        }));
+    }, Promise.resolve());
     /*
     const timeBetweenBlinks = 150;
     const numBlinks = 3;
