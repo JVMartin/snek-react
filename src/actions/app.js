@@ -10,32 +10,41 @@ export const startIntro = () => (dispatch, getState) => {
 
     // Create 1d array of coordinates.
     const coords = [];
-    for (let y = 0; y < state.height; ++y) {
-        for (let x = 0; x < state.width; ++x) {
+    for (let y = 0; y < state.height / 2; ++y) {
+        for (let x = 0; x < state.width / 2; ++x) {
             coords.push({ x, y });
+            coords.push({ x: state.width - x - 1, y: state.height - y - 1 });
         }
     }
 
     // Reduce coordinates to promises.
-    return _.reduce(coords, (promise, c) => {
-        return promise.then(new Promise(resolve => {
+    const tileMarch = _.reduce(coords, (promise, c) => {
+        return promise.then(() => new Promise(resolve => {
             setTimeout(() => {
-                dispatch({ type: 'SHOW_TILE', x: c.x, y: c.y });
+                dispatch({
+                    type: 'SHOW_TILE',
+                    x: c.x,
+                    y: c.y,
+                });
                 resolve();
-            }, 50);
+            }, 1);
         }));
     }, Promise.resolve());
-    /*
-    const timeBetweenBlinks = 150;
-    const numBlinks = 3;
-    for (let i = 1; i < numBlinks + 1; ++i) {
-        setTimeout(() => dispatch({ type: 'SHOW_BOARD' }), i * timeBetweenBlinks);
-        setTimeout(() => dispatch({ type: 'HIDE_BOARD' }), (i * timeBetweenBlinks) + (timeBetweenBlinks / 2));
 
-        if (i === numBlinks) {
-            setTimeout(() => dispatch({ type: 'SHOW_BOARD' }), (i + 1) * timeBetweenBlinks);
+    return tileMarch.then(() => {
+        const timeBetweenBlinks = 150;
+        const numBlinks = 5;
+        for (let i = 1; i < numBlinks + 1; ++i) {
+            setTimeout(() => dispatch({ type: 'SHOW_BOARD' }), i * timeBetweenBlinks);
+            setTimeout(() => dispatch({ type: 'HIDE_BOARD' }), (i * timeBetweenBlinks) + (timeBetweenBlinks / 2));
+
+            if (i === numBlinks) {
+                setTimeout(() => dispatch({ type: 'SHOW_BOARD' }), (i + 1) * timeBetweenBlinks);
+            }
         }
-    }
+    });
+
+    /*
     */
 };
 
