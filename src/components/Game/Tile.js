@@ -9,7 +9,7 @@ const classNameMap = {
 
 export const Tile = props => {
     const {
-        symbol
+        symbol,
     } = props;
 
     return (
