@@ -13,14 +13,18 @@ export const Tile = props => {
         tile,
     } = props;
 
+    const className = classNames('tile', classNameMap[tile.type], {
+        hide: !tile.visible,
+    });
+
     return (
-        <div className={classNames('tile', classNameMap[tile.symbol])} />
+        <div className={className} />
     );
 };
 
 Tile.propTypes = {
     tile: PropTypes.shape({
-        symbol: PropTypes.string.isRequired,
+        type: PropTypes.string.isRequired,
         visible: PropTypes.bool.isRequired,
     }).isRequired,
 };

@@ -9,6 +9,7 @@ export const startIntro = () => (dispatch, getState) => {
     const w = state.width;
     const h = state.height;
 
+    dispatch({ type: 'SHOW_BOARD' });
     dispatch({ type: 'SHOW_TILE', x: 0, y: 0 });
     /*
     const timeBetweenBlinks = 150;

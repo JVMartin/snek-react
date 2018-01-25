@@ -3,3 +3,6 @@
     margin: 20px auto;
 }
 
+.hide {
+    visibility: hidden;
+}
