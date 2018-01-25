@@ -15,6 +15,8 @@ export const startIntro = () => (dispatch, getState) => {
             coords.push([
                 { x, y },
                 { x: state.width - x - 1, y: state.height - y - 1 },
+                { x, y: state.height - y - 1 },
+                { x: state.width - x - 1, y },
             ]);
         }
     }
@@ -23,12 +25,9 @@ export const startIntro = () => (dispatch, getState) => {
     const tileMarch = _.reduce(coords, (promise, cs) => {
         return promise.then(() => new Promise(resolve => {
             setTimeout(() => {
-                cs.forEach(c => {
-                    dispatch({
-                        type: 'SHOW_TILE',
-                        x: c.x,
-                        y: c.y,
-                    });
+                dispatch({
+                    type: 'SHOW_TILES',
+                    coords: cs,
                 });
                 resolve();
             }, 1);
@@ -36,13 +35,13 @@ export const startIntro = () => (dispatch, getState) => {
     }, Promise.resolve());
 
     return tileMarch.then(() => {
-        const timeBetweenBlinks = 150;
-        const numBlinks = 5;
-        for (let i = 1; i < numBlinks + 1; ++i) {
+        const timeBetweenBlinks = 250;
+        const numBlinks = 2;
+        for (let i = 0; i < numBlinks; ++i) {
             setTimeout(() => dispatch({ type: 'SHOW_BOARD' }), i * timeBetweenBlinks);
             setTimeout(() => dispatch({ type: 'HIDE_BOARD' }), (i * timeBetweenBlinks) + (timeBetweenBlinks / 2));
 
-            if (i === numBlinks) {
+            if (i === numBlinks - 1) {
                 setTimeout(() => dispatch({ type: 'SHOW_BOARD' }), (i + 1) * timeBetweenBlinks);
             }
         }

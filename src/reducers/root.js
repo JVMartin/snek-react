@@ -1,4 +1,5 @@
 import update from 'immutability-helper';
+import _ from 'lodash';
 
 const initializeBoard = (width, height, visible = true) => {
     const board = [];
@@ -50,16 +51,23 @@ export const rootReducer = (state = initialState, action) => {
                 ...state,
                 boardVisible: false,
             };
-        case 'SHOW_TILE':
-            return update(state, {
-                board: {
-                    [action.y]: {
-                        [action.x]: {
+        case 'SHOW_TILES': {
+            let newBoard = state.board;
+            _.forEach(action.coords, c => {
+                newBoard = update(newBoard, {
+                    [c.y]: {
+                        [c.x]: {
                             visible: { $set: true },
                         },
                     },
-                },
+                });
             });
+
+            return {
+                ...state,
+                board: newBoard,
+            };
+        }
         case 'UPDATE_WIDTH':
             if (state.width === action.width) {
                 return state;
