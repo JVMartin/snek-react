@@ -1,5 +1,6 @@
 import update from 'immutability-helper';
 import _ from 'lodash';
+
 import { HEIGHT, WIDTH } from '../components/Game/Board';
 import { coordsEqual, randomInt } from '../utils';
 
@@ -178,6 +179,15 @@ export const rootReducer = (state = initialState, action) => {
                 };
             }
 
+            // Snek moved - move tails too.
+            if (!coordsEqual(snekCoords, snekCoordsNew) && snek.tails.length) {
+                const snekTails = _.cloneDeep(snek.tails);
+                snekTails.shift();
+                snekTails.push(snekCoords);
+                snek = update(snek, {
+                    tails: { $set: snekTails },
+                });
+            }
 
             const { apple } = state;
             let appleCoords = apple.c;

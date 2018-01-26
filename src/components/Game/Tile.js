@@ -8,6 +8,7 @@ const classNameMap = {
     X: 'wall',
     S: 'snek',
     A: 'apple',
+    T: 'tail',
 };
 
 export const Tile = props => {

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import _ from 'lodash';
 
 import { Tile } from './Tile';
 import './Board.css';
@@ -31,6 +32,9 @@ export const Board = props => {
             }
             else if (isApple) {
                 tileType = 'A';
+            }
+            else if (_.find(snek.tails, coords)) {
+                tileType = 'T';
             }
             const t = {
                 ...tile,

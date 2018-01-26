@@ -11,7 +11,11 @@
 }
 
 .tile.snek {
-    background: #106100;
+    background: #0e5700;
+}
+
+.tile.tail {
+    background: #3f8812;
 }
 
 .tile.apple {
