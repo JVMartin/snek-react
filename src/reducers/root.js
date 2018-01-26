@@ -104,6 +104,10 @@ export const rootReducer = (state = initialState, action) => {
                 },
             });
         case 'KEY_PRESS':
+            if (!state.running) {
+                return state;
+            }
+
             switch (action.key) {
                 case 'ArrowUp':
                     return update(state, {

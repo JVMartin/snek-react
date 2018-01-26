@@ -12,7 +12,7 @@ export class AppComponent extends Component {
         this.props.onLoad();
 
         document.addEventListener('keydown', this.props.onKeypress);
-        setInterval(this.props.tick, 100);
+        setInterval(this.props.tick, 150);
     }
 
     render() {
@@ -20,11 +20,17 @@ export class AppComponent extends Component {
             board,
             boardVisible,
             snek,
+            apple,
         } = this.props;
 
         return (
             <div id="masterWrap">
-                <Board board={board} visible={boardVisible} snek={snek} />
+                <Board
+                    board={board}
+                    visible={boardVisible}
+                    snek={snek}
+                    apple={apple}
+                />
             </div>
         );
     }
@@ -34,6 +40,7 @@ AppComponent.propTypes = {
     board: boardPropType.isRequired,
     boardVisible: PropTypes.bool.isRequired,
     snek: PropTypes.object.isRequired,
+    apple: PropTypes.object.isRequired,
     onLoad: PropTypes.func.isRequired,
     onKeypress: PropTypes.func.isRequired,
     tick: PropTypes.func.isRequired,
@@ -43,6 +50,7 @@ const mapStateToProps = state => ({
     board: state.board,
     boardVisible: state.boardVisible,
     snek: state.snek,
+    apple: state.apple,
     width: state.width,
     height: state.height,
 });

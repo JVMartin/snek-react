@@ -13,6 +13,7 @@ export const Board = props => {
         board,
         visible,
         snek,
+        apple,
     } = props;
 
     const rows = [];
@@ -20,9 +21,17 @@ export const Board = props => {
         const cols = [];
         row.forEach((tile, x) => {
             const isSnek = (snek.c.x === x && snek.c.y === y);
+            const isApple = (apple.c.x === x && apple.c.y === y);
+            let tileType = tile.type;
+            if (isSnek) {
+                tileType = 'S';
+            }
+            else if (isApple) {
+                tileType = 'A';
+            }
             const t = {
                 ...tile,
-                type: (isSnek) ? 'S' : tile.type,
+                type: tileType,
             };
             cols.push(<Tile tile={t} key={x} />);
         });
@@ -46,4 +55,5 @@ Board.propTypes = {
     board: boardPropType.isRequired,
     visible: PropTypes.bool.isRequired,
     snek: PropTypes.object.isRequired,
+    apple: PropTypes.object.isRequired,
 };
