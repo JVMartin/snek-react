@@ -212,7 +212,10 @@ export const rootReducer = (state = initialState, action) => {
                         x: randomInt(2, WIDTH - 2),
                         y: randomInt(2, HEIGHT - 2),
                     };
-                } while (coordsEqual(appleCoordsNew, snekCoordsNew));
+                } while (
+                    coordsEqual(appleCoordsNew, snekCoordsNew) ||
+                    _.find(snek.tails, appleCoordsNew)
+                );
             }
 
             return update(state, {
