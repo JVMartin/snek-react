@@ -44,8 +44,6 @@ const initialState = {
     apple: {
         c: { x: null, y: null },
     },
-    width: WIDTH,
-    height: HEIGHT,
     running: false,
 };
 

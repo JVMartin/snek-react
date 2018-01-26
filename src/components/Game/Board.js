@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import _ from 'lodash';
 
-import { Tile } from './Tile';
 import './Board.css';
+import { Tile } from './Tile';
 import { coordsEqual } from '../../utils';
 
 export const WIDTH = 20;

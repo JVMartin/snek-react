@@ -2,27 +2,25 @@ import _ from 'lodash';
 import { randomInt } from '../utils';
 import { HEIGHT, WIDTH } from '../components/Game/Board';
 
-export const startIntro = () => (dispatch, getState) => {
-    const state = getState();
-
+export const startIntro = () => dispatch => {
     const coordsSets = [];
-    for (let y = 0; y < state.height / 2; ++y) {
-        for (let x = 0; x < state.width / 2; ++x) {
+    for (let y = 0; y < HEIGHT / 2; ++y) {
+        for (let x = 0; x < WIDTH / 2; ++x) {
             coordsSets.push([
                 {
                     x,
                     y,
                 },
                 {
-                    x: state.width - x - 1,
-                    y: state.height - y - 1,
+                    x: WIDTH - x - 1,
+                    y: HEIGHT - y - 1,
                 },
                 {
                     x,
-                    y: state.height - y - 1,
+                    y: HEIGHT - y - 1,
                 },
                 {
-                    x: state.width - x - 1,
+                    x: WIDTH - x - 1,
                     y,
                 },
             ]);
