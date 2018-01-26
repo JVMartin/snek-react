@@ -42,25 +42,24 @@ export const startIntro = () => (dispatch, getState) => {
     ), Promise.resolve());
 
     return tileMarch.then(() => new Promise(resolve => {
-        const timeBetweenBlinks = 250;
-        const numBlinks = 3;
-        for (let i = 0; i < numBlinks; ++i) {
-            setTimeout(() => dispatch({ type: 'SHOW_BOARD' }), i * timeBetweenBlinks);
-            setTimeout(() => dispatch({ type: 'HIDE_BOARD' }), (i * timeBetweenBlinks) + (timeBetweenBlinks / 2));
+        const timeBetweenBlinks = 125;
+        setTimeout(() => dispatch({ type: 'HIDE_BOARD' }), timeBetweenBlinks);
+        setTimeout(() => dispatch({ type: 'SHOW_BOARD' }), timeBetweenBlinks * 2);
+        setTimeout(() => dispatch({ type: 'HIDE_BOARD' }), timeBetweenBlinks * 3);
+        setTimeout(() => dispatch({ type: 'SHOW_BOARD' }), timeBetweenBlinks * 4);
+        setTimeout(() => dispatch({ type: 'HIDE_BOARD' }), timeBetweenBlinks * 5);
+        setTimeout(() => dispatch({ type: 'SHOW_BOARD' }), timeBetweenBlinks * 6);
 
-            if (i === numBlinks - 1) {
-                setTimeout(() => {
-                    dispatch({ type: 'SHOW_BOARD' });
-                    dispatch({
-                        type: 'DROP_SNEK',
-                        c: {
-                            x: randomInt(1, WIDTH - 2),
-                            y: randomInt(1, HEIGHT - 2),
-                        },
-                    });
-                    resolve();
-                }, (i + 1) * timeBetweenBlinks);
-            }
-        }
+        const snekCoords = {
+            x: randomInt(1, WIDTH - 2),
+            y: randomInt(1, HEIGHT - 2),
+        };
+
+        setTimeout(() => dispatch({ type: 'DROP_SNEK', c: snekCoords }), timeBetweenBlinks * 7);
+        setTimeout(() => dispatch({ type: 'HIDE_TILES', coords: [snekCoords] }), timeBetweenBlinks * 8);
+        setTimeout(() => dispatch({ type: 'SHOW_TILES', coords: [snekCoords] }), timeBetweenBlinks * 9);
+        setTimeout(() => dispatch({ type: 'HIDE_TILES', coords: [snekCoords] }), timeBetweenBlinks * 10);
+        setTimeout(() => dispatch({ type: 'SHOW_TILES', coords: [snekCoords] }), timeBetweenBlinks * 11);
+        setTimeout(resolve, timeBetweenBlinks * 11);
     }));
 };
