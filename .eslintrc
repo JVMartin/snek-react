@@ -15,6 +15,7 @@
     "react/jsx-indent-props": false,
     "no-plusplus": "off",
     "brace-style": ["error", "stroustrup"],
-    "max-len": ["error", 180]
+    "max-len": ["error", 180],
+    "no-mixed-operators": "off"
   }
 }

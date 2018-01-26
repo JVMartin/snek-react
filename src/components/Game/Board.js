@@ -5,6 +5,9 @@ import classNames from 'classnames';
 import { Tile } from './Tile';
 import './Board.css';
 
+export const WIDTH = 20;
+export const HEIGHT = 20;
+
 export const Board = props => {
     const {
         board,

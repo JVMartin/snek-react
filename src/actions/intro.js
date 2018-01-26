@@ -1,4 +1,6 @@
 import _ from 'lodash';
+import { randomInt } from '../utils';
+import { HEIGHT, WIDTH } from '../components/Game/Board';
 
 export const startIntro = () => (dispatch, getState) => {
     const state = getState();
@@ -49,6 +51,13 @@ export const startIntro = () => (dispatch, getState) => {
             if (i === numBlinks - 1) {
                 setTimeout(() => {
                     dispatch({ type: 'SHOW_BOARD' });
+                    dispatch({
+                        type: 'DROP_SNEK',
+                        c: {
+                            x: randomInt(1, WIDTH - 2),
+                            y: randomInt(1, HEIGHT - 2),
+                        },
+                    });
                     resolve();
                 }, (i + 1) * timeBetweenBlinks);
             }

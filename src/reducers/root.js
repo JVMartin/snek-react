@@ -1,16 +1,17 @@
 import update from 'immutability-helper';
 import _ from 'lodash';
+import { HEIGHT, WIDTH } from '../components/Game/Board';
 
-const initializeBoard = (width, height, visible = true) => {
+const initializeBoard = (visible = true) => {
     const board = [];
 
-    for (let y = 0; y < height; ++y) {
+    for (let y = 0; y < HEIGHT; ++y) {
         const row = [];
 
-        for (let x = 0; x < width; ++x) {
+        for (let x = 0; x < WIDTH; ++x) {
             // Borders
-            if (x === 0 || x === width - 1 ||
-                y === 0 || y === height - 1) {
+            if (x === 0 || x === WIDTH - 1 ||
+                y === 0 || y === HEIGHT - 1) {
                 row.push({
                     type: 'X',
                     visible,
@@ -33,11 +34,15 @@ const initializeBoard = (width, height, visible = true) => {
 const initialState = {
     board: [],
     boardVisible: true,
-    width: 20,
-    height: 20,
+    snek: {
+        c: { x: null, y: null },
+        tails: [],
+    },
+    width: WIDTH,
+    height: HEIGHT,
 };
 
-initialState.board = initializeBoard(initialState.width, initialState.height, false);
+initialState.board = initializeBoard(false);
 
 export const rootReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -68,6 +73,13 @@ export const rootReducer = (state = initialState, action) => {
                 board: newBoard,
             };
         }
+        case 'DROP_SNEK':
+            return update(state, {
+                snek: {
+                    c: { $set: action.c },
+                    tails: { $set: [] },
+                },
+            });
         default:
             return state;
     }
