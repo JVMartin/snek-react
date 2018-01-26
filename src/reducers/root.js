@@ -73,6 +73,23 @@ export const rootReducer = (state = initialState, action) => {
                 board: newBoard,
             };
         }
+        case 'HIDE_TILES': {
+            let newBoard = state.board;
+            _.forEach(action.coords, c => {
+                newBoard = update(newBoard, {
+                    [c.y]: {
+                        [c.x]: {
+                            visible: { $set: false },
+                        },
+                    },
+                });
+            });
+
+            return {
+                ...state,
+                board: newBoard,
+            };
+        }
         case 'DROP_SNEK':
             return update(state, {
                 snek: {
