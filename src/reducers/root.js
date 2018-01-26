@@ -172,7 +172,8 @@ export const rootReducer = (state = initialState, action) => {
 
             const snekTile = state.board[snekCoordsNew.y][snekCoordsNew.x];
 
-            if (snekTile.type === 'X') {
+            // Snek ded. :(
+            if (snekTile.type === 'X' || _.find(snek.tails, snekCoordsNew)) {
                 return {
                     ...state,
                     running: false,
