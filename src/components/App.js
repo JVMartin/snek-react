@@ -18,11 +18,12 @@ export class AppComponent extends Component {
         const {
             board,
             boardVisible,
+            snek,
         } = this.props;
 
         return (
             <div id="masterWrap">
-                <Board board={board} visible={boardVisible} />
+                <Board board={board} visible={boardVisible} snek={snek} />
             </div>
         );
     }
@@ -31,6 +32,7 @@ export class AppComponent extends Component {
 AppComponent.propTypes = {
     board: boardPropType.isRequired,
     boardVisible: PropTypes.bool.isRequired,
+    snek: PropTypes.object.isRequired,
     onLoad: PropTypes.func.isRequired,
     onKeypress: PropTypes.func.isRequired,
 };
@@ -38,6 +40,7 @@ AppComponent.propTypes = {
 const mapStateToProps = state => ({
     board: state.board,
     boardVisible: state.boardVisible,
+    snek: state.snek,
     width: state.width,
     height: state.height,
 });

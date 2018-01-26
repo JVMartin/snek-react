@@ -9,3 +9,7 @@
 .tile.wall {
     background: #61005d;
 }
+
+.tile.snek {
+    background: #106100;
+}

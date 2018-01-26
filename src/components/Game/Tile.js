@@ -6,6 +6,7 @@ import './Tile.css';
 
 const classNameMap = {
     X: 'wall',
+    S: 'snek',
 };
 
 export const Tile = props => {
