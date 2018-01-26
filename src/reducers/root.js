@@ -1,7 +1,7 @@
 import update from 'immutability-helper';
 import _ from 'lodash';
 import { HEIGHT, WIDTH } from '../components/Game/Board';
-import { randomInt } from '../utils';
+import { coordsEqual, randomInt } from '../utils';
 
 const initializeBoard = (visible = true) => {
     const board = [];
@@ -158,12 +158,15 @@ export const rootReducer = (state = initialState, action) => {
                 return state;
             }
 
-            const { snek } = state;
+            let { snek } = state;
             const snekCoords = snek.c;
             const snekVelocity = snek.v;
             const snekCoordsNew = update(snekCoords, {
                 x: { $set: snekCoords.x + snekVelocity.x },
                 y: { $set: snekCoords.y + snekVelocity.y },
+            });
+            snek = update(snek, {
+                c: { $set: snekCoordsNew },
             });
 
             const snekTile = state.board[snekCoordsNew.y][snekCoordsNew.x];
@@ -175,21 +178,35 @@ export const rootReducer = (state = initialState, action) => {
                 };
             }
 
+
             const { apple } = state;
-            const appleCoords = apple.c;
+            let appleCoords = apple.c;
             let appleCoordsNew = appleCoords;
 
+            if (coordsEqual(snekCoordsNew, appleCoords)) {
+                appleCoords = { x: null, y: null };
+                snek = update(snek, {
+                    tails: {
+                        $set: [
+                            ...snek.tails,
+                            snekCoords,
+                        ],
+                    },
+                });
+            }
+
+            // Generate a new apple.
             if (appleCoords.x === null) {
-                appleCoordsNew = {
-                    x: randomInt(2, WIDTH - 2),
-                    y: randomInt(2, HEIGHT - 2),
-                };
+                do {
+                    appleCoordsNew = {
+                        x: randomInt(2, WIDTH - 2),
+                        y: randomInt(2, HEIGHT - 2),
+                    };
+                } while (coordsEqual(appleCoordsNew, snekCoordsNew));
             }
 
             return update(state, {
-                snek: {
-                    c: { $set: snekCoordsNew },
-                },
+                snek: { $set: snek },
                 apple: {
                     c: { $set: appleCoordsNew },
                 },

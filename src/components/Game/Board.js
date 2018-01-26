@@ -4,6 +4,7 @@ import classNames from 'classnames';
 
 import { Tile } from './Tile';
 import './Board.css';
+import { coordsEqual } from '../../utils';
 
 export const WIDTH = 20;
 export const HEIGHT = 20;
@@ -20,8 +21,10 @@ export const Board = props => {
     board.forEach((row, y) => {
         const cols = [];
         row.forEach((tile, x) => {
-            const isSnek = (snek.c.x === x && snek.c.y === y);
-            const isApple = (apple.c.x === x && apple.c.y === y);
+            const coords = { x, y };
+            const isSnek = coordsEqual(snek.c, coords);
+            const isApple = coordsEqual(apple.c, coords);
+
             let tileType = tile.type;
             if (isSnek) {
                 tileType = 'S';
@@ -33,6 +36,7 @@ export const Board = props => {
                 ...tile,
                 type: tileType,
             };
+
             cols.push(<Tile tile={t} key={x} />);
         });
         rows.push(<div className="row" key={y}>{cols}</div>);
