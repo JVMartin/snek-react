@@ -5,10 +5,10 @@ import { HEIGHT, WIDTH } from '../components/Game/Board';
 export const startIntro = () => (dispatch, getState) => {
     const state = getState();
 
-    const coords = [];
+    const coordsSets = [];
     for (let y = 0; y < state.height / 2; ++y) {
         for (let x = 0; x < state.width / 2; ++x) {
-            coords.push([
+            coordsSets.push([
                 {
                     x,
                     y,
@@ -29,12 +29,12 @@ export const startIntro = () => (dispatch, getState) => {
         }
     }
 
-    const tileMarch = _.reduce(coords, (promise, cs) => (
+    const tileMarch = _.reduce(coordsSets, (promise, coords) => (
         promise.then(() => new Promise(resolve => {
             setTimeout(() => {
                 dispatch({
                     type: 'SHOW_TILES',
-                    coords: cs,
+                    coords,
                 });
                 resolve();
             }, 1);
