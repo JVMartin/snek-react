@@ -59,7 +59,10 @@ export const startIntro = () => (dispatch, getState) => {
         setTimeout(() => dispatch({ type: 'HIDE_TILES', coords: [snekCoords] }), timeBetweenBlinks * 8);
         setTimeout(() => dispatch({ type: 'SHOW_TILES', coords: [snekCoords] }), timeBetweenBlinks * 9);
         setTimeout(() => dispatch({ type: 'HIDE_TILES', coords: [snekCoords] }), timeBetweenBlinks * 10);
-        setTimeout(() => dispatch({ type: 'SHOW_TILES', coords: [snekCoords] }), timeBetweenBlinks * 11);
-        setTimeout(resolve, timeBetweenBlinks * 11);
+        setTimeout(() => {
+            dispatch({ type: 'SHOW_TILES', coords: [snekCoords] });
+            dispatch({ type: 'RUN', coords: [snekCoords] });
+            resolve();
+        }, timeBetweenBlinks * 11);
     }));
 };

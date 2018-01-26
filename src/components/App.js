@@ -5,13 +5,14 @@ import PropTypes from 'prop-types';
 import './App.css';
 import { Board, boardPropType } from './Game/Board';
 import { startIntro } from '../actions/intro';
-import { keyPress } from '../actions/game';
+import { keyPress, tick } from '../actions/game';
 
 export class AppComponent extends Component {
     componentDidMount() {
         this.props.onLoad();
 
         document.addEventListener('keydown', this.props.onKeypress);
+        setInterval(this.props.tick, 100);
     }
 
     render() {
@@ -35,6 +36,7 @@ AppComponent.propTypes = {
     snek: PropTypes.object.isRequired,
     onLoad: PropTypes.func.isRequired,
     onKeypress: PropTypes.func.isRequired,
+    tick: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -48,6 +50,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
     onLoad: () => dispatch(startIntro()),
     onKeypress: event => dispatch(keyPress(event)),
+    tick: () => dispatch(tick()),
 });
 
 export const App = connect(

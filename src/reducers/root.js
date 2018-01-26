@@ -1,6 +1,7 @@
 import update from 'immutability-helper';
 import _ from 'lodash';
 import { HEIGHT, WIDTH } from '../components/Game/Board';
+import { randomInt } from '../utils';
 
 const initializeBoard = (visible = true) => {
     const board = [];
@@ -39,8 +40,12 @@ const initialState = {
         v: { x: 0, y: 0 },
         tails: [],
     },
+    apple: {
+        c: { x: null, y: null },
+    },
     width: WIDTH,
     height: HEIGHT,
+    running: false,
 };
 
 initialState.board = initializeBoard(false);
@@ -139,6 +144,52 @@ export const rootReducer = (state = initialState, action) => {
                 default:
                     return state;
             }
+        case 'RUN':
+            return {
+                ...state,
+                running: true,
+            };
+        case 'TICK':
+            if (!state.running) {
+                return state;
+            }
+
+            const { snek } = state;
+            const snekCoords = snek.c;
+            const snekVelocity = snek.v;
+            const snekCoordsNew = update(snekCoords, {
+                x: { $set: snekCoords.x + snekVelocity.x },
+                y: { $set: snekCoords.y + snekVelocity.y },
+            });
+
+            const snekTile = state.board[snekCoordsNew.y][snekCoordsNew.x];
+
+            if (snekTile.type === 'X') {
+                return {
+                    ...state,
+                    running: false,
+                };
+            }
+
+            const { apple } = state;
+            const appleCoords = apple.c;
+            let appleCoordsNew = appleCoords;
+
+            if (appleCoords.x === null) {
+                appleCoordsNew = {
+                    x: randomInt(2, WIDTH - 2),
+                    y: randomInt(2, HEIGHT - 2),
+                };
+            }
+
+            return update(state, {
+                snek: {
+                    c: { $set: snekCoordsNew },
+                },
+                apple: {
+                    c: { $set: appleCoordsNew },
+                },
+            });
         default:
             return state;
     }
