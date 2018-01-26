@@ -36,6 +36,7 @@ const initialState = {
     boardVisible: true,
     snek: {
         c: { x: null, y: null },
+        v: { x: 0, y: 0 },
         tails: [],
     },
     width: WIDTH,
@@ -97,6 +98,47 @@ export const rootReducer = (state = initialState, action) => {
                     tails: { $set: [] },
                 },
             });
+        case 'KEY_PRESS':
+            switch (action.key) {
+                case 'ArrowUp':
+                    return update(state, {
+                        snek: {
+                            v: {
+                                x: { $set: 0 },
+                                y: { $set: -1 },
+                            },
+                        },
+                    });
+                case 'ArrowDown':
+                    return update(state, {
+                        snek: {
+                            v: {
+                                x: { $set: 0 },
+                                y: { $set: 1 },
+                            },
+                        },
+                    });
+                case 'ArrowLeft':
+                    return update(state, {
+                        snek: {
+                            v: {
+                                x: { $set: -1 },
+                                y: { $set: 0 },
+                            },
+                        },
+                    });
+                case 'ArrowRight':
+                    return update(state, {
+                        snek: {
+                            v: {
+                                x: { $set: 1 },
+                                y: { $set: 0 },
+                            },
+                        },
+                    });
+                default:
+                    return state;
+            }
         default:
             return state;
     }
